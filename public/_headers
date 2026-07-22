@@ -1,0 +1,3 @@
+# Always serve the freshest HTML so game updates appear immediately.
+/*
+  Cache-Control: no-cache
