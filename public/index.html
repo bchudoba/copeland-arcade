@@ -86,6 +86,20 @@
 <body>
 <div id="wrap">
   <canvas id="c"></canvas>
+  <div id="soccerStart" class="overlay hidden">
+    <div style="font-size:8vw;font-weight:900;">🥅 SOCCER</div>
+    <div style="font-size:4.2vw;font-weight:700;">Dribble around the field 🏃<br>TAP to SHOOT from anywhere! 🥅</div>
+    <button class="bigbtn" id="soccerPlay">▶ PLAY</button>
+    <button class="buy gray toArc">🕹️ Arcade</button>
+  </div>
+  <div id="soccerOver" class="overlay hidden">
+    <div style="font-size:8vw;font-weight:900;">FULL TIME! ⚽</div>
+    <div id="soccerSubEl" style="font-size:4.6vw;font-weight:700;"></div>
+    <div class="row" style="display:flex;gap:3vw;flex-wrap:wrap;justify-content:center;">
+      <button class="bigbtn" id="soccerAgain">▶ PLAY AGAIN</button>
+      <button class="buy gray toArc">🕹️ Arcade</button>
+    </div>
+  </div>
   <div id="arcade" class="overlay">
     <div style="font-size:8vw;font-weight:900;">🕹️ COPELAND'S ARCADE</div>
     <div style="font-size:4vw;font-weight:700;">Pick a game!</div>
@@ -103,6 +117,7 @@
       <button class="cab" id="cabHoney" style="background:#e8a33a;"><span class="ce">🍯</span>Honey Garden</button>
       <button class="cab" id="cabWizard" style="background:#6a3aa0;"><span class="ce">🧙</span>Find the Wizard</button>
       <button class="cab" id="cabDraw" style="background:#e85aa0;"><span class="ce">🎨</span>Draw &amp; Guess</button>
+      <button class="cab" id="cabSoccer" style="background:#16a34a;"><span class="ce">🥅</span>Soccer</button>
     </div>
     <div class="menuRow">
       <button class="mbtn" id="openGallery" style="background:#43c463;">🎴 My Cards</button>
@@ -381,6 +396,7 @@ function splash(){ beep(600,0.1,'sine',0.25); setTimeout(()=>beep(820,0.1,'sine'
 
 let state='arcade', t=0, score=0;
 let activeGame='shark';
+let soccer;
 let bike, cars, houses, bikePies, bikeT, roadOff;
 let runner, zombies, zombieT, zScore, zSpeed, groundY, zScroll;
 let rocket, bullets, asteroids, spaceT, spaceScore, spaceSpd;
@@ -431,7 +447,7 @@ againBtn.onclick=start;
 againBtn.addEventListener('touchstart',e=>{e.stopPropagation();e.preventDefault();start();},{passive:false});
 
 function hideScreens(){
-  ['arcade','start','over','shop','bikeStart','bikeOver','zStart','zOver','spaceStart','spaceOver','ninjaStart','ninjaOver','raceStart','raceOver','dasherStart','dasherOver','baseballStart','baseballOver','footballStart','footballOver','rollerStart','rollerOver','honeyStart','beeShop','wizardStart','wizardOver','drawStart','photoBooth','reward','gallery','photoGallery','friends','maker'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+  ['arcade','start','over','shop','bikeStart','bikeOver','zStart','zOver','spaceStart','spaceOver','ninjaStart','ninjaOver','raceStart','raceOver','dasherStart','dasherOver','baseballStart','baseballOver','footballStart','footballOver','rollerStart','rollerOver','honeyStart','beeShop','wizardStart','wizardOver','drawStart','photoBooth','reward','gallery','photoGallery','friends','maker','soccerStart','soccerOver'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
   shopBtn.classList.add('hidden');
 }
 function showArcade(){ hideScreens(); arcadeEl.classList.remove('hidden'); state='arcade'; }
@@ -547,6 +563,7 @@ function tapAction(){
   else if(activeGame==='dasher') dasherDash();
   else if(activeGame==='baseball') baseballSwing();
   else if(activeGame==='honey') honeyTap(pointerX,pointerY);
+  else if(activeGame==='soccer') soccerKick();
 }
 function drawDown(x,y){ if(activeGame==='draw' && state==='play'){ drawing=true; drawStrokes.push({c:drawColor,pts:[{x,y}]}); return true; } return false; }
 function drawMove(x,y){ if(drawing && drawStrokes.length){ drawStrokes[drawStrokes.length-1].pts.push({x,y}); } }
@@ -1115,6 +1132,9 @@ document.getElementById('drawGotBtn').addEventListener('touchstart',e=>{ e.stopP
 document.getElementById('drawClearBtn').addEventListener('mousedown',e=>{ e.stopPropagation(); drawStrokes=[]; });
 document.getElementById('drawClearBtn').addEventListener('touchstart',e=>{ e.stopPropagation(); e.preventDefault(); drawStrokes=[]; },{passive:false});
 document.getElementById('cabDraw').onclick=()=>{ activeGame='draw'; hideScreens(); document.getElementById('drawStart').classList.remove('hidden'); state='start'; splash(); };
+document.getElementById('cabSoccer').onclick=()=>{ activeGame='soccer'; hideScreens(); document.getElementById('soccerStart').classList.remove('hidden'); state='start'; splash(); };
+document.getElementById('soccerPlay').onclick=startSoccer;
+document.getElementById('soccerAgain').onclick=startSoccer;
 wireBtn('drawPlay',startDraw);
 document.querySelectorAll('.toArc').forEach(b=>b.onclick=showArcade);
 
@@ -1367,10 +1387,151 @@ function loop(){
   else if(activeGame==='honey'){ updateHoney(); renderHoney(); }
   else if(activeGame==='wizard'){ updateWizard(); renderWizard(); }
   else if(activeGame==='draw'){ updateDraw(); renderDraw(); }
+  else if(activeGame==='soccer'){ updateSoccer(); renderSoccer(); }
   else { update(); render(); }
   requestAnimationFrame(loop);
 }
-reset(); resetBike(); resetZombie(); resetSpace(); resetNinja(); resetRace(); resetDasher(); resetBaseball(); resetFootball(); resetRoller(); resetHoney(); resetWizard(); resetDraw(); loop();
+// ---- SOCCER ----
+function soccerGeo(){
+  const goalW=Math.min(W*0.62, 380);
+  return { goalW, goalLeft:W/2-goalW/2, goalRight:W/2+goalW/2, goalY:Math.max(70,H*0.20) };
+}
+function resetSoccer(){
+  const g=soccerGeo();
+  soccer={ px:W/2, py:H*0.72, kx:W/2, ball:{x:W/2,y:H*0.72-18,vx:0,vy:0},
+    hasBall:true, shooting:false, safe:0,
+    mates:[{x:W*0.30,y:H*0.50,tx:W*0.30,ty:H*0.50},{x:W*0.70,y:H*0.50,tx:W*0.70,ty:H*0.50}],
+    defs:[{x:W*0.50,y:H*0.40},{x:W*0.33,y:H*0.33},{x:W*0.67,y:H*0.33}],
+    score:0, t:0, timeLeft:60*60, msg:'', msgT:0, confetti:[], g };
+  pointerX=W/2; pointerY=H*0.72;
+}
+function giveBallToPlayer(){
+  const s=soccer; s.hasBall=true; s.shooting=false; s.safe=24;
+  s.ball.vx=0; s.ball.vy=0; s.ball.x=s.px; s.ball.y=s.py-18;
+}
+function soccerKick(){
+  if(state!=='play') return;
+  const s=soccer, g=s.g;
+  if(!s.hasBall){ beep(190,0.05,'sine',0.16); return; }
+  const b=s.ball;
+  const aimX = (s.kx-g.goalLeft) > (g.goalRight-s.kx) ? g.goalLeft+34 : g.goalRight-34;
+  const dx=aimX-b.x, dy=g.goalY-b.y, d=Math.hypot(dx,dy), sp=10.2;
+  b.vx=dx/d*sp; b.vy=dy/d*sp;
+  s.hasBall=false; s.shooting=true;
+  const far = (s.py-g.goalY) > H*0.32;
+  s.msg = far ? 'LONG SHOT! 💥' : 'SHOOT! ⚽'; s.msgT=22;
+  beep(470,0.08,'square',0.3);
+}
+function soccerGoal(){
+  const s=soccer;
+  beep(700,0.1,'triangle',0.32); setTimeout(()=>beep(1050,0.12,'triangle',0.32),90); setTimeout(()=>beep(1400,0.14,'triangle',0.32),190);
+  for(let i=0;i<44;i++) s.confetti.push({x:W/2,y:s.g.goalY,vx:(Math.random()-0.5)*10,vy:-2-Math.random()*8,
+    c:['#ff5252','#ffd54a','#4a9dff','#57e389','#ff8a3a','#e75bd0'][(Math.random()*6)|0],life:60});
+}
+function soccerEnd(){
+  state='over';
+  beep(160,0.4,'sawtooth',0.3);
+  document.getElementById('soccerSubEl').innerHTML='You scored '+soccer.score+' goals! ⚽';
+  document.getElementById('soccerOver').classList.remove('hidden');
+}
+function startSoccer(){ resetSoccer(); state='play'; hideScreens(); splash(); }
+function updateSoccer(){
+  if(state!=='play') return;
+  const s=soccer, g=s.g, b=s.ball; s.t++;
+  s.timeLeft--; if(s.timeLeft<=0){ soccerEnd(); return; }
+  if(s.msgT>0) s.msgT--; if(s.safe>0) s.safe--;
+  for(const p of s.confetti){ p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.life--; }
+  s.confetti=s.confetti.filter(p=>p.life>0 && p.y<H+20);
+
+  // player moves toward finger (all directions)
+  s.px += (pointerX - s.px)*0.26; s.py += (pointerY - s.py)*0.26;
+  s.px=Math.max(30,Math.min(W-30,s.px)); s.py=Math.max(g.goalY+34,Math.min(H-30,s.py));
+
+  if(s.hasBall){
+    b.x=s.px; b.y=s.py-18; b.vx=0; b.vy=0;
+  } else {
+    b.x+=b.vx; b.y+=b.vy; b.vx*=0.94; b.vy*=0.94;
+    if(s.shooting){
+      if(b.y<=g.goalY){
+        if(b.x>g.goalLeft && b.x<g.goalRight){
+          if(Math.abs(b.x-s.kx)<36){ s.msg='SAVED! 🧤'; s.msgT=45; beep(220,0.18,'square',0.25); }
+          else { s.score++; s.msg='GOOOAL! ⚽'; s.msgT=55; soccerGoal(); }
+        } else { s.msg='Just wide!'; s.msgT=34; }
+        giveBallToPlayer();
+      } else if(b.x<-20||b.x>W+20||b.y>H+20){ s.msg='Out!'; s.msgT=30; giveBallToPlayer(); }
+    } else {
+      // loose ball — collect it by running over it
+      if(Math.hypot(b.x-s.px,b.y-s.py)<34){ giveBallToPlayer(); }
+      if(b.x<10||b.x>W-10||b.y>H-10){ giveBallToPlayer(); }
+    }
+  }
+
+  // teammates jog to roaming spots (fills the field)
+  for(const m of s.mates){
+    if(Math.hypot(m.tx-m.x,m.ty-m.y)<12){ m.tx=W*(0.2+Math.random()*0.6); m.ty=H*(0.35+Math.random()*0.4); }
+    m.x+=(m.tx-m.x)*0.02; m.y+=(m.ty-m.y)*0.02;
+  }
+
+  // defenders chase the ball; tackle if they reach you
+  for(const d of s.defs){
+    const dx=b.x-d.x, dy=b.y-d.y, dist=Math.hypot(dx,dy)||1, spd=1.7;
+    d.x+=dx/dist*spd; d.y+=dy/dist*spd;
+    d.y=Math.max(g.goalY+30,Math.min(H-30,d.y));
+    if(s.hasBall && s.safe===0 && Math.hypot(d.x-s.px,d.y-s.py)<30){
+      s.hasBall=false; s.shooting=false;
+      const a=Math.random()*6.28; b.vx=Math.cos(a)*5; b.vy=Math.sin(a)*5;
+      s.msg='Tackled! 😮'; s.msgT=30; beep(200,0.12,'sawtooth',0.25);
+    }
+  }
+
+  // keeper guards the line
+  const guard = s.shooting ? b.x : W/2+Math.sin(s.t*0.045)*g.goalW*0.34;
+  s.kx += (Math.max(g.goalLeft+22,Math.min(g.goalRight-22,guard)) - s.kx)*0.075;
+}
+function renderSoccer(){
+  const s=soccer, g=s.g;
+  ctx.fillStyle='#2f9e44'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='rgba(255,255,255,0.05)';
+  const band=Math.max(60,H/8);
+  for(let i=0;i<H;i+=band) if(((i/band)|0)%2===0) ctx.fillRect(0,i,W,band);
+  if(state==='play'||state==='over'){
+    // goal net
+    ctx.fillStyle='rgba(255,255,255,0.16)'; ctx.fillRect(g.goalLeft,0,g.goalW,g.goalY);
+    ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=2;
+    for(let x=g.goalLeft;x<=g.goalRight;x+=18){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,g.goalY); ctx.stroke(); }
+    for(let y=0;y<=g.goalY;y+=18){ ctx.beginPath(); ctx.moveTo(g.goalLeft,y); ctx.lineTo(g.goalRight,y); ctx.stroke(); }
+    ctx.strokeStyle='#ffffff'; ctx.lineWidth=8; ctx.beginPath();
+    ctx.moveTo(g.goalLeft,g.goalY); ctx.lineTo(g.goalLeft,0);
+    ctx.moveTo(g.goalRight,g.goalY); ctx.lineTo(g.goalRight,0);
+    ctx.moveTo(g.goalLeft,g.goalY); ctx.lineTo(g.goalRight,g.goalY); ctx.stroke();
+    // teammates (light orange = your team), defenders (red = their team)
+    for(const m of s.mates) drawPerson(m.x,m.y,'#ffcf6b','');
+    for(const d of s.defs) drawPerson(d.x,d.y,'#e23b3b','');
+    drawPerson(s.kx, g.goalY+16, '#e23b3b', '🧤');
+    drawPerson(s.px, s.py, '#ffb13a', '');
+    // ball
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='30px serif'; ctx.fillText('⚽',s.ball.x,s.ball.y);
+    // confetti
+    for(const p of s.confetti){ ctx.fillStyle=p.c; ctx.fillRect(p.x-3,p.y-3,6,6); }
+    // HUD
+    ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4;
+    ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
+    ctx.strokeText('⚽ '+s.score,16,14); ctx.fillText('⚽ '+s.score,16,14);
+    ctx.textAlign='right';
+    ctx.strokeText('⏱️ '+Math.ceil(s.timeLeft/60),W-16,14); ctx.fillText('⏱️ '+Math.ceil(s.timeLeft/60),W-16,14);
+    if(s.msgT>0){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='900 46px Comic Sans MS, sans-serif';
+      ctx.strokeText(s.msg,W/2,H*0.44); ctx.fillText(s.msg,W/2,H*0.44); }
+  }
+}
+function drawPerson(x,y,jersey,hands){
+  ctx.strokeStyle='#2b2b2b'; ctx.lineWidth=5;
+  ctx.beginPath(); ctx.moveTo(x-6,y+18); ctx.lineTo(x-6,y+30); ctx.moveTo(x+6,y+18); ctx.lineTo(x+6,y+30); ctx.stroke();
+  ctx.fillStyle=jersey; ctx.beginPath(); ctx.roundRect(x-13,y-6,26,26,7); ctx.fill();
+  ctx.fillStyle='#ffd9a8'; ctx.beginPath(); ctx.arc(x,y-16,9,0,7); ctx.fill();
+  if(hands){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='20px serif'; ctx.fillText(hands,x,y+4); }
+}
+
+reset(); resetBike(); resetZombie(); resetSpace(); resetNinja(); resetRace(); resetDasher(); resetBaseball(); resetFootball(); resetRoller(); resetHoney(); resetWizard(); resetDraw(); resetSoccer(); loop();
 </script>
 </body>
 </html>
