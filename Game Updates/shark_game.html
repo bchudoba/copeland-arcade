@@ -34,28 +34,6 @@
     box-shadow: 0 8px 0 #c98412, 0 12px 18px rgba(0,0,0,.35); transition: transform .08s; }
   .bigbtn:active { transform: translateY(5px); box-shadow: 0 3px 0 #c98412; }
   @media (min-width: 700px) { .bigbtn { font-size: 34px; padding: 16px 70px; } }
-  #camBtn { position: fixed; right: 14px; bottom: 14px; z-index: 7;
-    font-size: 30px; background: #fff; border: 4px solid #9b59ff; border-radius: 50%;
-    width: 62px; height: 62px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
-  #photoBooth .frame { background: #fff; padding: 14px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
-  #photoImg { max-width: 80vw; max-height: 52vh; border-radius: 8px; display: block; }
-  #homeBtn { position: fixed; left: 12px; top: 10px; z-index: 7;
-    font-family: 'Comic Sans MS', sans-serif; font-size: 16px; font-weight: 900; color: #fff;
-    background: #9b59ff; border: 3px solid #fff; border-radius: 14px; padding: 6px 12px; cursor: pointer; }
-  #reward .card { background: linear-gradient(#ffffff,#ffe9b3); border: 7px solid #ffb13a; border-radius: 20px;
-    padding: 16px 30px; box-shadow: 0 12px 34px rgba(0,0,0,.55); }
-  #prizeEmoji { font-size: 84px; line-height: 1; }
-  #prizeName { font-size: 5.5vw; font-weight: 900; color: #7a4ec2; }
-  #prizeStars { font-size: 6vw; }
-  @media (min-width: 700px) { #prizeName { font-size: 28px; } #prizeStars { font-size: 30px; } }
-  #galleryGrid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 92vw; max-height: 58vh; overflow: auto; padding: 6px; }
-  .gcard { background: linear-gradient(#ffffff,#ffe9b3); border: 4px solid #ffb13a; border-radius: 14px; padding: 8px 8px; width: 100px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
-  .gcard .ge { font-size: 42px; line-height: 1; }
-  .gcard .gn { font-size: 11px; font-weight: 900; color: #7a4ec2; }
-  .gcard .gs { font-size: 13px; }
-  .gcard .gc { font-size: 11px; color: #555; font-weight: 700; }
-  #photoGrid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 92vw; max-height: 58vh; overflow: auto; padding: 6px; }
-  #photoGrid img { width: 150px; border: 4px solid #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.5); }
   @media (min-width: 700px) { .buy { font-size: 24px; padding: 14px 44px; } }
   #arcade { background: rgba(4,38,63,.86); }
   .cabRow { display: flex; gap: 3vw; flex-wrap: wrap; justify-content: center; max-width: 92vw; }
@@ -73,18 +51,17 @@
     <div style="font-size:8vw;font-weight:900;">🕹️ COPELAND'S ARCADE</div>
     <div style="font-size:4vw;font-weight:700;">Pick a game!</div>
     <div class="cabRow">
-      <button class="cab" id="cabShark">🦈<br>Shark Games</button>
+      <button class="cab" id="cabShark">🦈<br>Shark Game</button>
       <button class="cab" id="cabBike" style="background:#ff8a3a;">🚲<br>Pie Delivery</button>
-      <button class="cab" id="cabZombie" style="background:#5aa84a;">🧟<br>Dumby Run</button>
-      <button class="cab" id="cabSpace" style="background:#3a4aff;">🚀<br>Space Blaster Brothers</button>
-      <button class="cab" id="cabNinja" style="background:#d23b8a;">🥷<br>Ninja City</button>
-      <button class="cab" id="cabRace" style="background:#e23b3b;">🏎️<br>Spy Racer</button>
+      <button class="cab" id="cabZombie" style="background:#5aa84a;">🧟<br>Zombie Run</button>
+      <button class="cab" id="cabSpace" style="background:#3a4aff;">🚀<br>Space Blaster</button>
+      <button class="cab" id="cabNinja" style="background:#d23b8a;">🥷<br>Ninja Slice</button>
+      <button class="cab" id="cabRace" style="background:#e23b3b;">🏎️<br>Speed Racer</button>
+      <button class="cab" id="cabSoccer" style="background:#16a34a;">⚽<br>Soccer</button>
     </div>
-    <button class="buy" id="openGallery" style="margin-top:2vh;">🎴 My Cards</button>
-    <button class="buy" id="openPhotos" style="margin-top:1vh;background:#3aa0ff;">📸 My Photos</button>
   </div>
   <div id="start" class="overlay hidden">
-    <div id="title">🦈 SHARK GAMES!</div>
+    <div id="title">🦈 SHARK GAME!</div>
     <div id="sub">Swim around and EAT the fish! 🐟</div>
     <button id="play">▶ PLAY</button>
   </div>
@@ -112,7 +89,7 @@
     </div>
   </div>
   <div id="zStart" class="overlay hidden">
-    <div style="font-size:8vw;font-weight:900;">🧟 DUMBY RUN!</div>
+    <div style="font-size:8vw;font-weight:900;">🧟 ZOMBIE RUN!</div>
     <div style="font-size:4.2vw;font-weight:700;">TAP to JUMP over the zombies! 🦘</div>
     <button id="zPlay">▶ PLAY</button>
     <button id="zArcade1" class="buy gray">🕹️ Arcade</button>
@@ -127,7 +104,7 @@
   </div>
 
   <div id="spaceStart" class="overlay hidden">
-    <div style="font-size:8vw;font-weight:900;">🚀 SPACE BLASTER BROTHERS</div>
+    <div style="font-size:8vw;font-weight:900;">🚀 SPACE BLASTER</div>
     <div style="font-size:4.2vw;font-weight:700;">Move to fly, TAP to ZAP! ☄️</div>
     <button class="bigbtn" id="spacePlay">▶ PLAY</button>
     <button class="buy gray toArc">🕹️ Arcade</button>
@@ -142,7 +119,7 @@
   </div>
 
   <div id="ninjaStart" class="overlay hidden">
-    <div style="font-size:8vw;font-weight:900;">🥷 NINJA CITY</div>
+    <div style="font-size:8vw;font-weight:900;">🥷 NINJA SLICE</div>
     <div style="font-size:4.2vw;font-weight:700;">TAP the fruit! 🍉 Don't tap bombs! 💣</div>
     <button class="bigbtn" id="ninjaPlay">▶ PLAY</button>
     <button class="buy gray toArc">🕹️ Arcade</button>
@@ -157,7 +134,7 @@
   </div>
 
   <div id="raceStart" class="overlay hidden">
-    <div style="font-size:8vw;font-weight:900;">🏎️ SPY RACER</div>
+    <div style="font-size:8vw;font-weight:900;">🏎️ SPEED RACER</div>
     <div style="font-size:4.2vw;font-weight:700;">Move UP &amp; DOWN, dodge cars! 🚗</div>
     <button class="bigbtn" id="racePlay">▶ PLAY</button>
     <button class="buy gray toArc">🕹️ Arcade</button>
@@ -170,35 +147,18 @@
       <button class="buy gray toArc">🕹️ Arcade</button>
     </div>
   </div>
-
-  <button id="camBtn" class="hidden">📸</button>
-  <button id="homeBtn" class="hidden">🕹️ Arcade</button>
-  <div id="reward" class="overlay hidden" style="background:rgba(0,0,0,.72);">
-    <div style="font-size:7vw;font-weight:900;">🎉 LEVEL <span id="lvlNum">1</span> BEATEN!</div>
-    <div style="font-size:4vw;font-weight:700;">You got a prize card! 🎴</div>
-    <div class="card">
-      <div id="prizeEmoji">🐙</div>
-      <div id="prizeName">Inky</div>
-      <div id="prizeStars">⭐</div>
-    </div>
-    <button class="bigbtn" id="rewardNext">▶ Keep Playing</button>
+  <div id="soccerStart" class="overlay hidden">
+    <div style="font-size:8vw;font-weight:900;">⚽ SOCCER</div>
+    <div style="font-size:4.2vw;font-weight:700;">Dribble around the field 🏃<br>TAP to SHOOT from anywhere! 🥅</div>
+    <button class="bigbtn" id="soccerPlay">▶ PLAY</button>
+    <button class="buy gray toArc">🕹️ Arcade</button>
   </div>
-  <div id="gallery" class="overlay hidden" style="background:rgba(4,38,63,.93);">
-    <div style="font-size:7vw;font-weight:900;">🎴 My Card Gallery</div>
-    <div id="galleryGrid"></div>
-    <button class="bigbtn" id="galleryBack">🕹️ Back to Arcade</button>
-  </div>
-  <div id="photoGallery" class="overlay hidden" style="background:rgba(4,38,63,.93);">
-    <div style="font-size:7vw;font-weight:900;">📸 My Photos</div>
-    <div id="photoGrid"></div>
-    <button class="bigbtn" id="photoBack">🕹️ Back to Arcade</button>
-  </div>
-  <div id="photoBooth" class="overlay hidden" style="background:rgba(0,0,0,.7);">
-    <div style="font-size:7vw;font-weight:900;">📸 Photo Booth!</div>
-    <div class="frame"><img id="photoImg" alt="game photo"/></div>
+  <div id="soccerOver" class="overlay hidden">
+    <div style="font-size:8vw;font-weight:900;">FULL TIME! ⚽</div>
+    <div id="soccerSubEl" style="font-size:4.6vw;font-weight:700;"></div>
     <div class="row" style="display:flex;gap:3vw;flex-wrap:wrap;justify-content:center;">
-      <button id="saveBtn" class="buy">💾 Save to Gallery</button>
-      <button id="closePhoto" class="buy gray">✖ Close</button>
+      <button class="bigbtn" id="soccerAgain">▶ PLAY AGAIN</button>
+      <button class="buy gray toArc">🕹️ Arcade</button>
     </div>
   </div>
   <div id="shop" class="overlay hidden">
@@ -221,11 +181,6 @@ const againBtn = document.getElementById('again');
 const shopBtn = document.getElementById('shopBtn');
 const shopEl = document.getElementById('shop');
 const shopDia = document.getElementById('shopDia');
-const camBtn = document.getElementById('camBtn');
-const homeBtn = document.getElementById('homeBtn');
-const photoBooth = document.getElementById('photoBooth');
-const photoImg = document.getElementById('photoImg');
-const saveBtn = document.getElementById('saveBtn');
 
 let W, H;
 function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
@@ -247,7 +202,8 @@ let runner, zombies, zombieT, zScore, zSpeed, groundY, zScroll;
 let rocket, bullets, asteroids, spaceT, spaceScore, spaceSpd;
 let ninjaItems, ninjaT, ninjaScore;
 let racer, traffic, raceT, raceScore, raceSpd, raceOff;
-let shark, fish, jellies, diamonds, bubbles, pointerX, pointerY, lives, diamondCount, level;
+let soccer;
+let shark, fish, jellies, diamonds, bubbles, pointerX, pointerY, lives, diamondCount;
 const FISH_EMOJI=['🐟','🐠','🐡'];
 
 function spawnFish(){
@@ -275,7 +231,7 @@ function reset(){
   jellies=[]; for(let i=0;i<3;i++) jellies.push(spawnJelly());
   diamonds=[]; for(let i=0;i<5;i++) diamonds.push(spawnDiamond());
   bubbles=[]; for(let i=0;i<18;i++) bubbles.push({x:Math.random()*W,y:Math.random()*H,r:2+Math.random()*5,s:0.4+Math.random()*0.9});
-  pointerX=W/2; pointerY=H/2; score=0; t=0; lives=3; diamondCount=0; gameLevel.shark=1;
+  pointerX=W/2; pointerY=H/2; score=0; t=0; lives=3; diamondCount=0;
 }
 
 function start(){ reset(); state='play'; arcadeEl.classList.add('hidden'); startEl.classList.add('hidden'); overEl.classList.add('hidden'); shopEl.classList.add('hidden'); shopBtn.classList.remove('hidden'); splash(); }
@@ -285,7 +241,7 @@ againBtn.onclick=start;
 againBtn.addEventListener('touchstart',e=>{e.stopPropagation();e.preventDefault();start();},{passive:false});
 
 function hideScreens(){
-  ['arcade','start','over','shop','bikeStart','bikeOver','zStart','zOver','spaceStart','spaceOver','ninjaStart','ninjaOver','raceStart','raceOver','photoBooth','reward','gallery','photoGallery'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
+  ['arcade','start','over','shop','bikeStart','bikeOver','zStart','zOver','spaceStart','spaceOver','ninjaStart','ninjaOver','raceStart','raceOver','soccerStart','soccerOver'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); });
   shopBtn.classList.add('hidden');
 }
 function showArcade(){ hideScreens(); arcadeEl.classList.remove('hidden'); state='arcade'; }
@@ -302,7 +258,7 @@ document.querySelectorAll('.cab.soon').forEach(c=>c.onclick=()=>beep(300,0.12,'s
 // ---- BIKE GAME ----
 function resetBike(){
   bike={x:W*0.18, y:H*0.5, size:46};
-  cars=[]; houses=[]; bikePies=0; gameLevel.bike=1; bikeT=0; roadOff=0;
+  cars=[]; houses=[]; bikePies=0; bikeT=0; roadOff=0;
   pointerX=W*0.18; pointerY=H*0.5;
 }
 function startBike(){
@@ -329,7 +285,7 @@ function updateBike(){
   bikeT++; roadOff=(roadOff+4)%80;
   bike.y += (pointerY - bike.y)*0.18;
   bike.y = Math.max(70, Math.min(H-50, bike.y));
-  if(bikeT % 52 === 0) cars.push({x:W+40, y:70+Math.random()*(H-130), vx:-(3.4+Math.random()*2), e:Math.random()<0.5?'🚗':'🚙'});
+  if(bikeT % 45 === 0) cars.push({x:W+40, y:70+Math.random()*(H-130), vx:-(4+Math.random()*2.6), e:Math.random()<0.5?'🚗':'🚙'});
   if(bikeT % 150 === 0) houses.push({x:W+50, y:70+Math.random()*(H-130), done:false});
   for(const c of cars){
     c.x+=c.vx;
@@ -337,11 +293,10 @@ function updateBike(){
   }
   cars=cars.filter(c=>c.x>-70);
   for(const h of houses){
-    h.x-=3.6;
+    h.x-=4.2;
     if(!h.done && Math.hypot(h.x-bike.x,h.y-bike.y) < 46){ h.done=true; bikePies++; beep(900,0.08,'triangle',0.3); setTimeout(()=>beep(1300,0.1,'triangle',0.3),70); }
   }
   houses=houses.filter(h=>h.x>-70 && !h.done);
-  if(bikePies >= gameLevel.bike*GOALS.bike){ winLevel(); return; }
 }
 function renderBike(){
   // road
@@ -365,8 +320,7 @@ function renderBike(){
     // pies HUD
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4;
     ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('🥧 '+bikePies, 120, 14); ctx.fillText('🥧 '+bikePies, 120, 14);
-    ctx.textAlign='right'; ctx.strokeText('Lvl '+gameLevel.bike+' '+bikePies+'/'+(gameLevel.bike*GOALS.bike), W-16, 14); ctx.fillText('Lvl '+gameLevel.bike+' '+bikePies+'/'+(gameLevel.bike*GOALS.bike), W-16, 14); ctx.textAlign='left';
+    ctx.strokeText('🥧 '+bikePies, 16, 14); ctx.fillText('🥧 '+bikePies, 16, 14);
   }
 }
 
@@ -398,6 +352,7 @@ function tapAction(){
   if(activeGame==='zombie') zombieJump();
   else if(activeGame==='space') spaceShoot();
   else if(activeGame==='ninja') ninjaSlice(pointerX,pointerY);
+  else if(activeGame==='soccer') soccerKick();
 }
 addEventListener('mousemove',e=>setPointer(e.clientX,e.clientY));
 addEventListener('mousedown',e=>{ setPointer(e.clientX,e.clientY); tapAction(); });
@@ -417,7 +372,7 @@ function update(){
   t++;
   // shark eases toward pointer
   const dx=pointerX-shark.x, dy=pointerY-shark.y;
-  shark.x+=dx*0.07; shark.y+=dy*0.07;
+  shark.x+=dx*0.08; shark.y+=dy*0.08;
   if(Math.abs(dx)>2) shark.face = dx<0 ? -1 : 1;
 
   // fish swim + bounce
@@ -434,8 +389,6 @@ function update(){
   }
   // bubbles rise
   for(const b of bubbles){ b.y-=b.s; if(b.y<-10){ b.y=H+10; b.x=Math.random()*W; } }
-
-  if(score >= gameLevel.shark*GOALS.shark){ winLevel(); return; }
 
   // diamonds on the ocean floor
   for(const d of diamonds){
@@ -497,15 +450,12 @@ function render(){
     // score
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4;
     ctx.font='900 32px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('🐟 '+score, 120, 14); ctx.fillText('🐟 '+score, 120, 14);
-    ctx.strokeText('💎 '+diamondCount, 120, 52); ctx.fillText('💎 '+diamondCount, 120, 52);
+    ctx.strokeText('🐟 '+score, 16, 14); ctx.fillText('🐟 '+score, 16, 14);
+    ctx.strokeText('💎 '+diamondCount, 16, 52); ctx.fillText('💎 '+diamondCount, 16, 52);
     // hearts
     ctx.font='28px serif'; ctx.textAlign='right';
     let hearts=''; for(let i=0;i<lives;i++) hearts+='❤️';
     ctx.fillText((shark.shield?'🛡️ ':'')+(hearts||'💔'), W-16, 16);
-    ctx.font='900 20px Comic Sans MS, sans-serif';
-    ctx.strokeText('Lvl '+gameLevel.shark+'  🐟'+score+'/'+(gameLevel.shark*GOALS.shark), W-16, 50);
-    ctx.fillText('Lvl '+gameLevel.shark+'  🐟'+score+'/'+(gameLevel.shark*GOALS.shark), W-16, 50);
   }
 }
 
@@ -513,7 +463,7 @@ function render(){
 function resetZombie(){
   groundY=H-70;
   runner={x:W*0.22, y:groundY, vy:0, onGround:true};
-  zombies=[]; zombieT=0; zScore=0; gameLevel.zombie=1; zSpeed=4.2; zScroll=0;
+  zombies=[]; zombieT=0; zScore=0; zSpeed=5; zScroll=0;
 }
 function startZombie(){
   resetZombie(); state='play';
@@ -549,7 +499,6 @@ function updateZombie(){
   }
   zombies=zombies.filter(z=>z.x>-50);
   if(zombieT%6===0) zScore++;
-  if(zScore >= gameLevel.zombie*GOALS.zombie){ winLevel(); return; }
 }
 function renderZombie(){
   const g=ctx.createLinearGradient(0,0,0,H);
@@ -567,13 +516,12 @@ function renderZombie(){
     ctx.fillText('🏃',runner.x,runner.y);
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4;
     ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('⭐ '+zScore, 120, 14); ctx.fillText('⭐ '+zScore, 120, 14);
-    ctx.textAlign='right'; ctx.strokeText('Lvl '+gameLevel.zombie+' '+zScore+'/'+(gameLevel.zombie*GOALS.zombie), W-16, 14); ctx.fillText('Lvl '+gameLevel.zombie+' '+zScore+'/'+(gameLevel.zombie*GOALS.zombie), W-16, 14); ctx.textAlign='left';
+    ctx.strokeText('⭐ '+zScore, 16, 14); ctx.fillText('⭐ '+zScore, 16, 14);
   }
 }
 
 // ---- SPACE BLASTER ----
-function resetSpace(){ rocket={x:W*0.2,y:H/2}; bullets=[]; asteroids=[]; spaceT=0; spaceScore=0; gameLevel.space=1; spaceSpd=3.4; pointerY=H/2; }
+function resetSpace(){ rocket={x:W*0.2,y:H/2}; bullets=[]; asteroids=[]; spaceT=0; spaceScore=0; spaceSpd=4; pointerY=H/2; }
 function startSpace(){ resetSpace(); state='play'; hideScreens(); splash(); }
 function spaceOverFn(){ state='over'; beep(120,0.4,'sawtooth',0.3); document.getElementById('spaceSubEl').innerHTML='You blasted '+spaceScore+'! ☄️'; document.getElementById('spaceOver').classList.remove('hidden'); }
 function spaceShoot(){ bullets.push({x:rocket.x+24,y:rocket.y}); beep(880,0.05,'square',0.18); }
@@ -581,7 +529,7 @@ function updateSpace(){
   if(state!=='play') return;
   spaceT++; spaceSpd+=0.0015;
   rocket.y += (pointerY-rocket.y)*0.2; rocket.y=Math.max(40,Math.min(H-40,rocket.y));
-  if(spaceT%56===0) asteroids.push({x:W+40,y:40+Math.random()*(H-80),vy:(Math.random()-0.5)*1.6});
+  if(spaceT%50===0) asteroids.push({x:W+40,y:40+Math.random()*(H-80),vy:(Math.random()-0.5)*1.6});
   for(const b of bullets) b.x+=12;
   bullets=bullets.filter(b=>b.x<W+20 && !b.dead);
   for(const a of asteroids){
@@ -591,7 +539,6 @@ function updateSpace(){
   }
   asteroids=asteroids.filter(a=>a.x>-50 && !a.hit);
   bullets=bullets.filter(b=>!b.dead);
-  if(spaceScore >= gameLevel.space*GOALS.space){ winLevel(); return; }
 }
 function renderSpace(){
   const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#0a0a2a'); g.addColorStop(1,'#241848'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
@@ -602,14 +549,13 @@ function renderSpace(){
     ctx.font='40px serif'; for(const a of asteroids) ctx.fillText('☄️',a.x,a.y);
     ctx.font='44px serif'; ctx.fillText('🚀',rocket.x,rocket.y);
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4; ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('☄️ '+spaceScore,120,14); ctx.fillText('☄️ '+spaceScore,120,14);
-    ctx.textAlign='right'; ctx.strokeText('Lvl '+gameLevel.space+' '+spaceScore+'/'+(gameLevel.space*GOALS.space), W-16, 14); ctx.fillText('Lvl '+gameLevel.space+' '+spaceScore+'/'+(gameLevel.space*GOALS.space), W-16, 14); ctx.textAlign='left';
+    ctx.strokeText('☄️ '+spaceScore,16,14); ctx.fillText('☄️ '+spaceScore,16,14);
   }
 }
 
 // ---- NINJA SLICE ----
 const NINJA_FRUIT=['🍉','🍎','🍌','🍓','🍊','🥝'];
-function resetNinja(){ ninjaItems=[]; ninjaT=0; ninjaScore=0; gameLevel.ninja=1; }
+function resetNinja(){ ninjaItems=[]; ninjaT=0; ninjaScore=0; }
 function startNinja(){ resetNinja(); state='play'; hideScreens(); splash(); }
 function ninjaOverFn(){ state='over'; beep(120,0.4,'sawtooth',0.3); document.getElementById('ninjaSubEl').innerHTML='You sliced '+ninjaScore+'! 🍉'; document.getElementById('ninjaOver').classList.remove('hidden'); }
 function ninjaSlice(x,y){
@@ -625,11 +571,10 @@ function updateNinja(){
   ninjaT++;
   if(ninjaT%45===0){
     const bomb=Math.random()<0.25;
-    ninjaItems.push({x:60+Math.random()*(W-120), y:H+30, vx:(Math.random()-0.5)*3, vy:-Math.sqrt(2*0.32*H*(0.7+Math.random()*0.16)), bomb, e:bomb?'💣':NINJA_FRUIT[(Math.random()*NINJA_FRUIT.length)|0]});
+    ninjaItems.push({x:60+Math.random()*(W-120), y:H+30, vx:(Math.random()-0.5)*3, vy:-(13+Math.random()*3), bomb, e:bomb?'💣':NINJA_FRUIT[(Math.random()*NINJA_FRUIT.length)|0]});
   }
   for(const it of ninjaItems){ it.vy+=0.32; it.x+=it.vx; it.y+=it.vy; }
   ninjaItems=ninjaItems.filter(it=>it.y<H+60);
-  if(ninjaScore >= gameLevel.ninja*GOALS.ninja){ winLevel(); return; }
 }
 function renderNinja(){
   const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#3a2b5a'); g.addColorStop(1,'#1a1030'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
@@ -637,13 +582,12 @@ function renderNinja(){
     ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='46px serif';
     for(const it of ninjaItems) ctx.fillText(it.e,it.x,it.y);
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4; ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('🍉 '+ninjaScore,120,14); ctx.fillText('🍉 '+ninjaScore,120,14);
-    ctx.textAlign='right'; ctx.strokeText('Lvl '+gameLevel.ninja+' '+ninjaScore+'/'+(gameLevel.ninja*GOALS.ninja), W-16, 14); ctx.fillText('Lvl '+gameLevel.ninja+' '+ninjaScore+'/'+(gameLevel.ninja*GOALS.ninja), W-16, 14); ctx.textAlign='left';
+    ctx.strokeText('🍉 '+ninjaScore,16,14); ctx.fillText('🍉 '+ninjaScore,16,14);
   }
 }
 
 // ---- SPEED RACER ----
-function resetRace(){ racer={x:W*0.18,y:H/2}; traffic=[]; raceT=0; raceScore=0; gameLevel.race=1; raceSpd=4.2; raceOff=0; pointerY=H/2; }
+function resetRace(){ racer={x:W*0.18,y:H/2}; traffic=[]; raceT=0; raceScore=0; raceSpd=5; raceOff=0; pointerY=H/2; }
 function startRace(){ resetRace(); state='play'; hideScreens(); splash(); }
 function raceOverFn(){ state='over'; beep(120,0.4,'sawtooth',0.3); document.getElementById('raceSubEl').innerHTML='You drove past '+raceScore+'! 🏁'; document.getElementById('raceOver').classList.remove('hidden'); }
 function updateRace(){
@@ -654,7 +598,6 @@ function updateRace(){
   for(const c of traffic){ c.x-=raceSpd; if(Math.hypot(c.x-racer.x,c.y-racer.y)<36){ raceOverFn(); return; } }
   traffic=traffic.filter(c=>c.x>-60);
   if(raceT%6===0) raceScore++;
-  if(raceScore >= gameLevel.race*GOALS.race){ winLevel(); return; }
 }
 function renderRace(){
   ctx.fillStyle='#3a3f4a'; ctx.fillRect(0,0,W,H);
@@ -667,147 +610,173 @@ function renderRace(){
     ctx.font='40px serif'; for(const c of traffic) ctx.fillText(c.e,c.x,c.y);
     ctx.font='42px serif'; ctx.save(); ctx.translate(racer.x,racer.y); ctx.scale(-1,1); ctx.fillText('🏎️',0,0); ctx.restore();
     ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4; ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.strokeText('🏁 '+raceScore,120,14); ctx.fillText('🏁 '+raceScore,120,14);
-    ctx.textAlign='right'; ctx.strokeText('Lvl '+gameLevel.race+' '+raceScore+'/'+(gameLevel.race*GOALS.race), W-16, 14); ctx.fillText('Lvl '+gameLevel.race+' '+raceScore+'/'+(gameLevel.race*GOALS.race), W-16, 14); ctx.textAlign='left';
+    ctx.strokeText('🏁 '+raceScore,16,14); ctx.fillText('🏁 '+raceScore,16,14);
   }
+}
+
+// ---- SOCCER ----
+function soccerGeo(){
+  const goalW=Math.min(W*0.62, 380);
+  return { goalW, goalLeft:W/2-goalW/2, goalRight:W/2+goalW/2, goalY:Math.max(70,H*0.20) };
+}
+function resetSoccer(){
+  const g=soccerGeo();
+  soccer={ px:W/2, py:H*0.72, kx:W/2, ball:{x:W/2,y:H*0.72-18,vx:0,vy:0},
+    hasBall:true, shooting:false, safe:0,
+    mates:[{x:W*0.30,y:H*0.50,tx:W*0.30,ty:H*0.50},{x:W*0.70,y:H*0.50,tx:W*0.70,ty:H*0.50}],
+    defs:[{x:W*0.50,y:H*0.40},{x:W*0.33,y:H*0.33},{x:W*0.67,y:H*0.33}],
+    score:0, t:0, timeLeft:60*60, msg:'', msgT:0, confetti:[], g };
+  pointerX=W/2; pointerY=H*0.72;
+}
+function giveBallToPlayer(){
+  const s=soccer; s.hasBall=true; s.shooting=false; s.safe=24;
+  s.ball.vx=0; s.ball.vy=0; s.ball.x=s.px; s.ball.y=s.py-18;
+}
+function soccerKick(){
+  if(state!=='play') return;
+  const s=soccer, g=s.g;
+  if(!s.hasBall){ beep(190,0.05,'sine',0.16); return; }
+  const b=s.ball;
+  const aimX = (s.kx-g.goalLeft) > (g.goalRight-s.kx) ? g.goalLeft+34 : g.goalRight-34;
+  const dx=aimX-b.x, dy=g.goalY-b.y, d=Math.hypot(dx,dy), sp=10.2;
+  b.vx=dx/d*sp; b.vy=dy/d*sp;
+  s.hasBall=false; s.shooting=true;
+  const far = (s.py-g.goalY) > H*0.32;
+  s.msg = far ? 'LONG SHOT! 💥' : 'SHOOT! ⚽'; s.msgT=22;
+  beep(470,0.08,'square',0.3);
+}
+function soccerGoal(){
+  const s=soccer;
+  beep(700,0.1,'triangle',0.32); setTimeout(()=>beep(1050,0.12,'triangle',0.32),90); setTimeout(()=>beep(1400,0.14,'triangle',0.32),190);
+  for(let i=0;i<44;i++) s.confetti.push({x:W/2,y:s.g.goalY,vx:(Math.random()-0.5)*10,vy:-2-Math.random()*8,
+    c:['#ff5252','#ffd54a','#4a9dff','#57e389','#ff8a3a','#e75bd0'][(Math.random()*6)|0],life:60});
+}
+function soccerEnd(){
+  state='over';
+  beep(160,0.4,'sawtooth',0.3);
+  document.getElementById('soccerSubEl').innerHTML='You scored '+soccer.score+' goals! ⚽';
+  document.getElementById('soccerOver').classList.remove('hidden');
+}
+function startSoccer(){ resetSoccer(); state='play'; hideScreens(); splash(); }
+function updateSoccer(){
+  if(state!=='play') return;
+  const s=soccer, g=s.g, b=s.ball; s.t++;
+  s.timeLeft--; if(s.timeLeft<=0){ soccerEnd(); return; }
+  if(s.msgT>0) s.msgT--; if(s.safe>0) s.safe--;
+  for(const p of s.confetti){ p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.life--; }
+  s.confetti=s.confetti.filter(p=>p.life>0 && p.y<H+20);
+
+  // player moves toward finger (all directions)
+  s.px += (pointerX - s.px)*0.26; s.py += (pointerY - s.py)*0.26;
+  s.px=Math.max(30,Math.min(W-30,s.px)); s.py=Math.max(g.goalY+34,Math.min(H-30,s.py));
+
+  if(s.hasBall){
+    b.x=s.px; b.y=s.py-18; b.vx=0; b.vy=0;
+  } else {
+    b.x+=b.vx; b.y+=b.vy; b.vx*=0.94; b.vy*=0.94;
+    if(s.shooting){
+      if(b.y<=g.goalY){
+        if(b.x>g.goalLeft && b.x<g.goalRight){
+          if(Math.abs(b.x-s.kx)<36){ s.msg='SAVED! 🧤'; s.msgT=45; beep(220,0.18,'square',0.25); }
+          else { s.score++; s.msg='GOOOAL! ⚽'; s.msgT=55; soccerGoal(); }
+        } else { s.msg='Just wide!'; s.msgT=34; }
+        giveBallToPlayer();
+      } else if(b.x<-20||b.x>W+20||b.y>H+20){ s.msg='Out!'; s.msgT=30; giveBallToPlayer(); }
+    } else {
+      // loose ball — collect it by running over it
+      if(Math.hypot(b.x-s.px,b.y-s.py)<34){ giveBallToPlayer(); }
+      if(b.x<10||b.x>W-10||b.y>H-10){ giveBallToPlayer(); }
+    }
+  }
+
+  // teammates jog to roaming spots (fills the field)
+  for(const m of s.mates){
+    if(Math.hypot(m.tx-m.x,m.ty-m.y)<12){ m.tx=W*(0.2+Math.random()*0.6); m.ty=H*(0.35+Math.random()*0.4); }
+    m.x+=(m.tx-m.x)*0.02; m.y+=(m.ty-m.y)*0.02;
+  }
+
+  // defenders chase the ball; tackle if they reach you
+  for(const d of s.defs){
+    const dx=b.x-d.x, dy=b.y-d.y, dist=Math.hypot(dx,dy)||1, spd=1.7;
+    d.x+=dx/dist*spd; d.y+=dy/dist*spd;
+    d.y=Math.max(g.goalY+30,Math.min(H-30,d.y));
+    if(s.hasBall && s.safe===0 && Math.hypot(d.x-s.px,d.y-s.py)<30){
+      s.hasBall=false; s.shooting=false;
+      const a=Math.random()*6.28; b.vx=Math.cos(a)*5; b.vy=Math.sin(a)*5;
+      s.msg='Tackled! 😮'; s.msgT=30; beep(200,0.12,'sawtooth',0.25);
+    }
+  }
+
+  // keeper guards the line
+  const guard = s.shooting ? b.x : W/2+Math.sin(s.t*0.045)*g.goalW*0.34;
+  s.kx += (Math.max(g.goalLeft+22,Math.min(g.goalRight-22,guard)) - s.kx)*0.075;
+}
+function renderSoccer(){
+  const s=soccer, g=s.g;
+  ctx.fillStyle='#2f9e44'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='rgba(255,255,255,0.05)';
+  const band=Math.max(60,H/8);
+  for(let i=0;i<H;i+=band) if(((i/band)|0)%2===0) ctx.fillRect(0,i,W,band);
+  if(state==='play'||state==='over'){
+    // goal net
+    ctx.fillStyle='rgba(255,255,255,0.16)'; ctx.fillRect(g.goalLeft,0,g.goalW,g.goalY);
+    ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=2;
+    for(let x=g.goalLeft;x<=g.goalRight;x+=18){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,g.goalY); ctx.stroke(); }
+    for(let y=0;y<=g.goalY;y+=18){ ctx.beginPath(); ctx.moveTo(g.goalLeft,y); ctx.lineTo(g.goalRight,y); ctx.stroke(); }
+    ctx.strokeStyle='#ffffff'; ctx.lineWidth=8; ctx.beginPath();
+    ctx.moveTo(g.goalLeft,g.goalY); ctx.lineTo(g.goalLeft,0);
+    ctx.moveTo(g.goalRight,g.goalY); ctx.lineTo(g.goalRight,0);
+    ctx.moveTo(g.goalLeft,g.goalY); ctx.lineTo(g.goalRight,g.goalY); ctx.stroke();
+    // teammates (light orange = your team), defenders (red = their team)
+    for(const m of s.mates) drawPerson(m.x,m.y,'#ffcf6b','');
+    for(const d of s.defs) drawPerson(d.x,d.y,'#e23b3b','');
+    drawPerson(s.kx, g.goalY+16, '#e23b3b', '🧤');
+    drawPerson(s.px, s.py, '#ffb13a', '');
+    // ball
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='30px serif'; ctx.fillText('⚽',s.ball.x,s.ball.y);
+    // confetti
+    for(const p of s.confetti){ ctx.fillStyle=p.c; ctx.fillRect(p.x-3,p.y-3,6,6); }
+    // HUD
+    ctx.fillStyle='#fff'; ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=4;
+    ctx.font='900 30px Comic Sans MS, sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
+    ctx.strokeText('⚽ '+s.score,16,14); ctx.fillText('⚽ '+s.score,16,14);
+    ctx.textAlign='right';
+    ctx.strokeText('⏱️ '+Math.ceil(s.timeLeft/60),W-16,14); ctx.fillText('⏱️ '+Math.ceil(s.timeLeft/60),W-16,14);
+    if(s.msgT>0){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='900 46px Comic Sans MS, sans-serif';
+      ctx.strokeText(s.msg,W/2,H*0.44); ctx.fillText(s.msg,W/2,H*0.44); }
+  }
+}
+function drawPerson(x,y,jersey,hands){
+  ctx.strokeStyle='#2b2b2b'; ctx.lineWidth=5;
+  ctx.beginPath(); ctx.moveTo(x-6,y+18); ctx.lineTo(x-6,y+30); ctx.moveTo(x+6,y+18); ctx.lineTo(x+6,y+30); ctx.stroke();
+  ctx.fillStyle=jersey; ctx.beginPath(); ctx.roundRect(x-13,y-6,26,26,7); ctx.fill();
+  ctx.fillStyle='#ffd9a8'; ctx.beginPath(); ctx.arc(x,y-16,9,0,7); ctx.fill();
+  if(hands){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='20px serif'; ctx.fillText(hands,x,y+4); }
 }
 
 // ---- new cabinets + buttons ----
 document.getElementById('cabSpace').onclick=()=>{ activeGame='space'; hideScreens(); document.getElementById('spaceStart').classList.remove('hidden'); state='start'; splash(); };
 document.getElementById('cabNinja').onclick=()=>{ activeGame='ninja'; hideScreens(); document.getElementById('ninjaStart').classList.remove('hidden'); state='start'; splash(); };
 document.getElementById('cabRace').onclick=()=>{ activeGame='race'; hideScreens(); document.getElementById('raceStart').classList.remove('hidden'); state='start'; splash(); };
+document.getElementById('cabSoccer').onclick=()=>{ activeGame='soccer'; hideScreens(); document.getElementById('soccerStart').classList.remove('hidden'); state='start'; splash(); };
 function wireBtn(id,fn){ const el=document.getElementById(id); el.onclick=fn; el.addEventListener('touchstart',e=>{e.stopPropagation();e.preventDefault();fn();},{passive:false}); }
 wireBtn('spacePlay',startSpace); wireBtn('spaceAgain',startSpace);
 wireBtn('ninjaPlay',startNinja); wireBtn('ninjaAgain',startNinja);
 wireBtn('racePlay',startRace); wireBtn('raceAgain',startRace);
+wireBtn('soccerPlay',startSoccer); wireBtn('soccerAgain',startSoccer);
 document.querySelectorAll('.toArc').forEach(b=>b.onclick=showArcade);
 
-let gameLevel={shark:1,bike:1,zombie:1,space:1,ninja:1,race:1};
-const GOALS={shark:8,bike:3,zombie:60,space:8,ninja:8,race:60};
-const CARDS={
- shark:[
-  {e:'🐙',n:'Inky the Octopus',r:'⭐'},{e:'🐢',n:'Shelly the Turtle',r:'⭐'},
-  {e:'🦀',n:'Snappy Crab',r:'⭐'},{e:'🐠',n:'Rainbow Fish',r:'⭐⭐'},
-  {e:'🦑',n:'Giant Squid',r:'⭐⭐'},{e:'🐚',n:'Pearl Shell',r:'⭐⭐'},
-  {e:'🐋',n:'Big Blue Whale',r:'⭐⭐⭐'},{e:'🦈',n:'MEGA SHARK',r:'⭐⭐⭐'},
- ],
- bike:[
-  {e:'🍕',n:'Pizza Pie',r:'⭐'},{e:'🍩',n:'Sprinkle Donut',r:'⭐'},
-  {e:'🧁',n:'Cupcake',r:'⭐'},{e:'🎂',n:'Birthday Cake',r:'⭐⭐'},
-  {e:'🍔',n:'Mega Burger',r:'⭐⭐'},{e:'🥧',n:'Golden Pie',r:'⭐⭐⭐'},
- ],
- zombie:[
-  {e:'👻',n:'Boo Ghost',r:'⭐'},{e:'🦇',n:'Batty',r:'⭐'},
-  {e:'🎃',n:'Pumpkin King',r:'⭐⭐'},{e:'💀',n:'Spooky Skull',r:'⭐⭐'},
-  {e:'🧟',n:'Zombie Boss',r:'⭐⭐⭐'},
- ],
- space:[
-  {e:'🪐',n:'Ringed Planet',r:'⭐'},{e:'🌟',n:'Super Star',r:'⭐'},
-  {e:'🛸',n:'Flying UFO',r:'⭐⭐'},{e:'👽',n:'Alien Pal',r:'⭐⭐'},
-  {e:'☄️',n:'Comet King',r:'⭐⭐⭐'},{e:'🚀',n:'Mega Rocket',r:'⭐⭐⭐'},
- ],
- ninja:[
-  {e:'🍉',n:'Melon Master',r:'⭐'},{e:'🍣',n:'Sushi Roll',r:'⭐'},
-  {e:'🥷',n:'Shadow Ninja',r:'⭐⭐'},{e:'⚔️',n:'Twin Swords',r:'⭐⭐'},
-  {e:'🐉',n:'Ninja Dragon',r:'⭐⭐⭐'},
- ],
- race:[
-  {e:'🚗',n:'Speedy Car',r:'⭐'},{e:'🛞',n:'Turbo Tire',r:'⭐'},
-  {e:'🏁',n:'Checkered Flag',r:'⭐⭐'},{e:'🏎️',n:'Race King',r:'⭐⭐'},
-  {e:'🏆',n:'Gold Trophy',r:'⭐⭐⭐'},
- ],
-};
-function winLevel(){
-  state='reward';
-  const k=activeGame;
-  document.getElementById('lvlNum').textContent=gameLevel[k];
-  const pool=CARDS[k]||CARDS.shark;
-  const c=pool[(Math.random()*pool.length)|0];
-  addCard(c);
-  document.getElementById('prizeEmoji').textContent=c.e;
-  document.getElementById('prizeName').textContent=c.n;
-  document.getElementById('prizeStars').textContent=c.r;
-  document.getElementById('reward').classList.remove('hidden');
-  beep(700,0.1,'triangle',0.3); setTimeout(()=>beep(900,0.1,'triangle',0.3),120); setTimeout(()=>beep(1200,0.16,'triangle',0.3),240);
-}
-document.getElementById('rewardNext').onclick=()=>{ gameLevel[activeGame]++; document.getElementById('reward').classList.add('hidden'); state='play'; };
-
-function takePhoto(){
-  if(state!=='play') return;
-  let data; try{ data=canvas.toDataURL('image/png'); }catch(e){ return; }
-  photoImg.src=data;
-  try{
-    const tw=480, th=Math.max(1,Math.round(H*(tw/W)));
-    const oc=document.createElement('canvas'); oc.width=tw; oc.height=th;
-    oc.getContext('2d').drawImage(canvas,0,0,tw,th);
-    currentPhotoThumb=oc.toDataURL('image/jpeg',0.72);
-  }catch(e){ currentPhotoThumb=data; }
-  saveBtn.textContent='💾 Save to Gallery';
-  state='photo'; photoBooth.classList.remove('hidden');
-  beep(1000,0.05,'square',0.2); setTimeout(()=>beep(1400,0.05,'square',0.2),60);
-}
-function closePhoto(){ if(state==='photo'){ state='play'; photoBooth.classList.add('hidden'); } }
-camBtn.addEventListener('mousedown',e=>{ e.stopPropagation(); takePhoto(); });
-camBtn.addEventListener('touchstart',e=>{ e.stopPropagation(); e.preventDefault(); takePhoto(); },{passive:false});
-document.getElementById('closePhoto').onclick=closePhoto;
-homeBtn.addEventListener('mousedown',e=>{ e.stopPropagation(); showArcade(); });
-homeBtn.addEventListener('touchstart',e=>{ e.stopPropagation(); e.preventDefault(); showArcade(); },{passive:false});
-
-function loadCollection(){ try{ return JSON.parse(localStorage.getItem('copelandCards')||'{}'); }catch(e){ return {}; } }
-let collection=loadCollection();
-let currentPhotoThumb=null;
-function loadPhotos(){ try{ return JSON.parse(localStorage.getItem('copelandPhotos')||'[]'); }catch(e){ return []; } }
-let photos=loadPhotos();
-function savePhotos(){
-  try{ localStorage.setItem('copelandPhotos', JSON.stringify(photos)); }
-  catch(e){ photos=photos.slice(-8); try{ localStorage.setItem('copelandPhotos', JSON.stringify(photos)); }catch(e2){} }
-}
-function savePhotoToGallery(){
-  if(!currentPhotoThumb) return;
-  photos.push(currentPhotoThumb);
-  if(photos.length>16) photos=photos.slice(-16);
-  savePhotos();
-  saveBtn.textContent='Saved! ✅';
-  beep(1100,0.07,'triangle',0.3); setTimeout(()=>beep(1500,0.09,'triangle',0.3),70);
-  setTimeout(()=>{ saveBtn.textContent='💾 Save to Gallery'; },1200);
-}
-function buildPhotoGallery(){
-  const grid=document.getElementById('photoGrid'); grid.innerHTML='';
-  if(!photos.length){ grid.innerHTML='<div style="color:#fff;font-weight:700;font-size:18px;">No photos yet — take some while you play! 📸</div>'; return; }
-  for(let i=photos.length-1;i>=0;i--){ const img=document.createElement('img'); img.src=photos[i]; img.alt='photo'; grid.appendChild(img); }
-}
-function openPhotos(){ buildPhotoGallery(); hideScreens(); document.getElementById('photoGallery').classList.remove('hidden'); state='gallery'; }
-saveBtn.onclick=savePhotoToGallery;
-document.getElementById('openPhotos').onclick=openPhotos;
-document.getElementById('photoBack').onclick=showArcade;
-function saveCollection(){ try{ localStorage.setItem('copelandCards', JSON.stringify(collection)); }catch(e){} }
-function addCard(c){ if(!collection[c.n]) collection[c.n]={e:c.e,n:c.n,r:c.r,count:0}; collection[c.n].count++; saveCollection(); }
-function buildGallery(){
-  const grid=document.getElementById('galleryGrid'); grid.innerHTML='';
-  const keys=Object.keys(collection);
-  if(!keys.length){ grid.innerHTML='<div style="color:#fff;font-weight:700;font-size:18px;">No cards yet — go win some! 🎴</div>'; return; }
-  for(const k of keys){ const c=collection[k];
-    const d=document.createElement('div'); d.className='gcard';
-    d.innerHTML='<div class="ge">'+c.e+'</div><div class="gn">'+c.n+'</div><div class="gs">'+c.r+'</div><div class="gc">x'+c.count+'</div>';
-    grid.appendChild(d);
-  }
-}
-function openGallery(){ buildGallery(); hideScreens(); document.getElementById('gallery').classList.remove('hidden'); state='gallery'; }
-document.getElementById('openGallery').onclick=openGallery;
-document.getElementById('galleryBack').onclick=showArcade;
-
 function loop(){
-  camBtn.classList.toggle('hidden', state!=='play');
-  homeBtn.classList.toggle('hidden', state!=='play');
   if(activeGame==='bike'){ updateBike(); renderBike(); }
   else if(activeGame==='zombie'){ updateZombie(); renderZombie(); }
   else if(activeGame==='space'){ updateSpace(); renderSpace(); }
   else if(activeGame==='ninja'){ updateNinja(); renderNinja(); }
   else if(activeGame==='race'){ updateRace(); renderRace(); }
+  else if(activeGame==='soccer'){ updateSoccer(); renderSoccer(); }
   else { update(); render(); }
   requestAnimationFrame(loop);
 }
-reset(); resetBike(); resetZombie(); resetSpace(); resetNinja(); resetRace(); loop();
+reset(); resetBike(); resetZombie(); resetSpace(); resetNinja(); resetRace(); resetSoccer(); loop();
 </script>
 </body>
 </html>
